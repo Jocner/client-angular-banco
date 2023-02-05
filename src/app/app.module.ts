@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { DestinatarioComponent } from './destinatario/destinatario.component';
 import { TransferenciaComponent } from './transferencia/transferencia.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,8 +21,8 @@ import { TransferenciaComponent } from './transferencia/transferencia.component'
   ],
   imports: [
     BrowserModule,
-    routing,
     FormsModule,
+    routing,
     HttpClientModule
   ],
   providers: [CookieService],

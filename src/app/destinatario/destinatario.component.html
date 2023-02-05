@@ -1,5 +1,6 @@
-<div class="login">
-    <form class="custom-form" method="post">
+<!-- <div class="login"> -->
+  <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
+    <!-- <form class="custom-form" method="post">
       <h1>Destinatario</h1>
 
       <input
@@ -32,7 +33,7 @@
         name="telefono"
         placeholder="Telefono"
         required="required"
-      />
+      /> -->
 
       <!-- <input
         type="text"
@@ -42,18 +43,46 @@
         required="required"
       /> -->
 
-      <select [(ngModel)]="opcionSeleccionado" (change)="capturar()">
+
+      <div>
+        <label for="rut">
+          Rut
+        </label>
+        <input id="rut" type="text" formControlName="rut">
+      </div>
+    
+      <div>
+        <label for="nombre">
+          Nombre
+        </label>
+        <input id="nombre" type="text" formControlName="nombre">
+      </div>
+
+      <div>
+        <label for="email">
+          Email
+        </label>
+        <input id="email" type="email" formControlName="email">
+      </div>
+
+      <div>
+        <label for="telefono">
+          Telefono
+        </label>
+        <input id="telefono" type="text" formControlName="telefono">
+      </div>
+
+      <!-- <select class="form-select" [(ngModel)]="selected">
+        <option *ngFor="let n of bancos">{{ n }}</option>
+      </select>
+      {{ selected }} -->
+
+      <!-- <select [(ngModel)]="opcionSeleccionado" (change)="capturar()">
         <option value="Santander">Selecciona una Cuenta</option>
         <option *ngFor="let banco of bancos">
-          {{banco.entidad}}
+          {{banco}}
         </option>
-      </select>
-
-      <select name="workStatus" [(ngModel)]="contact.workStatus">
-        <option *ngFor="let status of workStatuses" [value]="status.id">
-          <span>{{ status.description }}</span>
-        </option>
-      </select>
+      </select> -->
 
     
 
@@ -78,11 +107,12 @@
         <option value="3">BCI</option>
         <option value="4">Banco Estado</option> 
       </select> -->
-      <p [hidden]="opcionSeleccionado == 'Santander'">Haz seleccionado la opción # {{ verSeleccion }}</p>
-      <button type="submit" >Registrar</button>
-    </form>
-
+      <!-- <p [hidden]="opcionSeleccionado == 'Santander'">Haz seleccionado la opción # {{ verSeleccion }}</p> -->
+      <!-- <button type="submit" >Registrar</button>
+    </form> -->
+    <button class="button" type="submit">Purchase</button>
+  </form>
     <!-- Prueba para ver la opción seleccionado -->
-<p [hidden]="opcionSeleccionado == '0'">Haz seleccionado la opción # {{ verSeleccion }}</p>
-  </div>
+<!-- <p [hidden]="opcionSeleccionado == 'Santander'">Haz seleccionado la opción # {{ verSeleccion }}</p> -->
+  <!-- </div> -->
 
