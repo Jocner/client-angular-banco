@@ -4,7 +4,7 @@
 
       <input
         type="text"
-
+        [(ngModel)]="rut"
         name="rut"
         placeholder="Rut"
         required="required"
@@ -12,7 +12,7 @@
 
       <input
         type="text"
-
+        [(ngModel)]="nombre"
         name="nombre"
         placeholder="Nombre"
         required="required"
@@ -20,7 +20,7 @@
 
       <input
         type="email"
-
+        [(ngModel)]="email"
         name="email"
         placeholder="Email"
         required="required"
@@ -28,7 +28,7 @@
 
       <input
         type="text"
-
+        [(ngModel)]="telefono"
         name="telefono"
         placeholder="Telefono"
         required="required"
@@ -42,12 +42,20 @@
         required="required"
       /> -->
 
-      <select placeholder="Cuenta">
-        <option value="one">Corriente</option>
-        <option value="2">Ahorro</option>
-        <option value="3">Vista</option>
-        <option value="4">Rut</option>
+      <select [(ngModel)]="opcionSeleccionado" (change)="capturar()">
+        <option value="Santander">Selecciona una Cuenta</option>
+        <option *ngFor="let banco of bancos">
+          {{banco.entidad}}
+        </option>
       </select>
+
+      <select name="workStatus" [(ngModel)]="contact.workStatus">
+        <option *ngFor="let status of workStatuses" [value]="status.id">
+          <span>{{ status.description }}</span>
+        </option>
+      </select>
+
+    
 
       <!-- <input
         type="text"
@@ -57,14 +65,24 @@
         required="required"
       /> -->
 
-      <select placeholder="Banco">
+      <!-- <select placeholder="Banco">
         <option value="one">Santander</option>
         <option value="2">Itau</option>
         <option value="3">BCI</option>
         <option value="4">Banco Estado</option>
-      </select>
-      
+      </select> -->
+
+      <!-- <select [(ngModel)]="opcionSeleccionado" (change)="capturar()">
+        <option *ngFor="let banco of datos">{{banco}}</option> -->
+        <!-- <option value="2">Itau</option>
+        <option value="3">BCI</option>
+        <option value="4">Banco Estado</option> 
+      </select> -->
+      <p [hidden]="opcionSeleccionado == 'Santander'">Haz seleccionado la opción # {{ verSeleccion }}</p>
       <button type="submit" >Registrar</button>
     </form>
+
+    <!-- Prueba para ver la opción seleccionado -->
+<p [hidden]="opcionSeleccionado == '0'">Haz seleccionado la opción # {{ verSeleccion }}</p>
   </div>
 

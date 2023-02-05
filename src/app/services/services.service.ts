@@ -16,7 +16,17 @@ export class ServicesService {
   constructor(private http: HttpClient, private cookies: CookieService) { }
 
   login(user: any): Observable<any> {
-    // return this.http.post(`${api}/login`, user);
+
     return this.http.post("http://localhost:4000/login", user);
+  }
+
+  destinatario(user: any): Observable<any> {
+   
+    return this.http.post("http://localhost:4000/newDestinatario", user);
+  }
+
+  bancos(): Observable<any> {
+   
+    return this.http.get("http://localhost:4000/bancos");
   }
 }
