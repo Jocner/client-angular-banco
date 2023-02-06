@@ -10,9 +10,10 @@ import { LoginComponent } from './login/login.component';
 import { DestinatarioComponent } from './destinatario/destinatario.component';
 import { TransferenciaComponent } from './transferencia/transferencia.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TransacionComponent } from './transacion/transacion.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import {NgbCollapseModule} from '@ng-bootstrap/ng-bootstrap';
 
-// import { MatCardModule,MatFormFieldModule,MatInputModule } from '@angular/material';
+
 
 
 
@@ -23,14 +24,16 @@ import { TransacionComponent } from './transacion/transacion.component';
     LoginComponent,
     DestinatarioComponent,
     TransferenciaComponent,
-    TransacionComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     routing,
     HttpClientModule,
+    Ng2SearchPipeModule,
+    NgbCollapseModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

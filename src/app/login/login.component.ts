@@ -10,14 +10,13 @@ import Swal from 'sweetalert2';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  // email: string;
-  // password: string;
+
 
   constructor(public serviceService: ServicesService, public router: Router) {}
 
   email: string | undefined;
   password: string | undefined;
-
+  public isCollapsed = true;
   login() {
     const user = { email: this.email, password: this.password };
     
@@ -41,10 +40,7 @@ export class LoginComponent {
         console.log('data', data)
         console.log('dsfsdfsd', data.token)
         
-        // const result = data.msg || data.token.msg || data.token.message ? alerta : alert this.router.navigateByUrl("/destinatario");
-        // const result = data.msg = 'ERROR DEL SERVICIO' || data.token == 'CREDENCIALES INVALIDOS' ? alerta : this.router.navigateByUrl("/destinatario");
-        // const result = data == 'CREDENCIALES INVALIDOS' ? alerta : this.router.navigateByUrl("/");
-       
+
         switch (data.msg || data.token.msg || data.token.message ) {
           case "ERROR DEL SERVICIO":
               alerta
@@ -56,35 +52,12 @@ export class LoginComponent {
             alert
             this.router.navigateByUrl("/destinatario");
               break;
-          // case 3:
-          //     console.log("It is a Wednesday.");
-          //     break;
-          // case 4:
-          //     console.log("It is a Thursday.");
-          //     break;
-          // case 5:
-          //     console.log("It is a Friday.");
-          //     break;
-          // case 6:
-          //     console.log("It is a Saturday.");
-          //     break;
           default:
-            // this.router.navigateByUrl("/destinatario");
             console.log("Destinatario");
               break;
       }
 
-        // return result;
 
-  
-
-
-        // const decoded: any = jwt_decode(token.token);
-
-
-
-
-   
       
       }
   

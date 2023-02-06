@@ -7,12 +7,12 @@ import { TransferenciaComponent } from "./transferencia/transferencia.component"
 
 
 const appRoutes = [
-    // { path: "", component: AppComponent},
-    { path: "home", component: HomeComponent},
+
+
     { path: "", component: LoginComponent},
     { path: "destinatario", component: DestinatarioComponent},
     { path: "transferencia", component: TransferenciaComponent},
-    // { path: "login", component: LoginComponent},
+
   ];
 
 export const routing = RouterModule.forRoot(appRoutes);

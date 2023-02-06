@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ServicesService } from '../services/services.service';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DestinatarioModel } from '../model/destinatario.model';
+import { TransfenciaModel } from '../model/transferencia.model';
+import Swal from 'sweetalert2';
 
 const info = [] ;
 
@@ -12,76 +15,55 @@ const info = [] ;
 })
 export class TransferenciaComponent implements OnInit {
 
-  // const result = sessionStorage.getItem('desti');
 
-  constructor(public serviceService: ServicesService, private formBuilder: FormBuilder , public router: Router) {
-    
-    this.serviceService.alldestinatarios().subscribe(
-      data => {
-        data.clientes.map(function (object: any){
-           console.log('listado con MAP', object);
-          
-           info.push(object);
-        })
-        // for(let info of data.cliente) console.log('FOR', info)
-        // for(let i = 0; i <= data.length; i++){
-        //   console.log('desde componente FOR', data[i].clientes)
-        // }
-        for(let i = 0; i <= data.clientes.length; i++){
-          console.log('desde componente FOR', data.clientes[i])
-          sessionStorage.setItem('desti', data.clientes[i].cuenta)
-          // info.push( [data.clientes[i]])
-        }
-        
-        // this.info.push(data.clientes)
-        console.log('desde componente transferencia', data.clientes)
-        console.log('info afuera de map', this.info)
-      }
-    );
+
+  constructor(public serviceService: ServicesService) {
 
   }
   
   info: any[] = [];
   info2: any ;
   info3 = sessionStorage.getItem('desti');
+  items: DestinatarioModel[] = [];
+  searchText: any;
+  email: any;
+  rut: any;
+  nombre: any;
+  telefono: any;
+  cuenta: any;
+  bancodestino: any;
+  monto: number | undefined;
 
+  data: any = {
+    rut: '',
+    nombre: '',
+    email: '',
+    telefono: '',
+    cuenta: "",
+    bancodestino: "",
+    monto: ''
+}
+  
   
   
   ngOnInit(){
-    // this.serviceService.alldestinatarios().subscribe(
-    //   data => {
-    //     data.clientes.map(function (object: any){
-    //        console.log('listado con MAP', object);
-          
-    //        info.push(object);
-    //     })
-        // for(let info of data.cliente) console.log('FOR', info)
-        // for(let i = 0; i <= data.length; i++){
-        //   console.log('desde componente FOR', data[i].clientes)
-        // }
-    //     for(let i = 0; i <= data.clientes.length; i++){
-    //       console.log('desde componente FOR', data.clientes[i])
-    //       sessionStorage.setItem('desti', data.clientes[i].cuenta)
-    //       // info.push( [data.clientes[i]])
-    //     }
-        
-    //     // this.info.push(data.clientes)
-    //     console.log('desde componente transferencia', data.clientes)
-    //     console.log('info afuera de map', this.info)
-    //   }
-    // );
-
-    // console.log('sessionStorage', (sessionStorage.getItem('desti')))
+    this.serviceService.alldestinatarios().subscribe(
+      data => {
+      
+       
+        this.items = data.clientes;
+   
+      }
+    );
 
 
   }
   listado() {
+    
+
      this.serviceService.alldestinatarios().subscribe(
       data => {
-        // data.cliente.map(function (object: any){
-        //    console.log('listado con MAP', object);
-        // })
-        // for(let info of data.cliente) console.log('FOR', info)
+
         for(let i = 0; i <= data.clientes.length; i++){
           console.log('desde componente FOR', data.clientes[i].bancodestino
           )
@@ -90,10 +72,32 @@ export class TransferenciaComponent implements OnInit {
         // sessionStorage.setItem('desti', data.clientes)
         console.log('desde componente transferencia', data.clientes)
         this.info2 = data;
-        return data.clientes;
+       this.items = data.clientes;
       }
     );
   }
 
+  transferencia() {
+    const info = { email: this.email, rut: this.rut, nombre: this.nombre, telefono: this.telefono, cuenta: this.cuenta, bancodestino: this.bancodestino, monto: this.monto }
 
+    try{
+      this.serviceService.login(info).subscribe(
+        data => {
+
+          console.log("tranferencia realizada", data)
+         
+        Swal.fire({ 
+          icon: "success",
+          title: "Transferencia Realizada",
+          text: "Exito",
+        });
+        }
+      );    
+
+    }catch(err) {
+      console.log( err);
+     
+    }
+
+  }
 }
