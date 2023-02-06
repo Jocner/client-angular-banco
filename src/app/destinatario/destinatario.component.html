@@ -1,11 +1,11 @@
 <!-- <div class="login"> -->
-  <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
-    <!-- <form class="custom-form" method="post">
+  <!-- <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)"> -->
+    <form class="custom-form" method="post">
       <h1>Destinatario</h1>
 
       <input
         type="text"
-        [(ngModel)]="rut"
+        [(ngModel)]="data.rut"
         name="rut"
         placeholder="Rut"
         required="required"
@@ -13,7 +13,7 @@
 
       <input
         type="text"
-        [(ngModel)]="nombre"
+        [(ngModel)]="data.nombre"
         name="nombre"
         placeholder="Nombre"
         required="required"
@@ -21,7 +21,7 @@
 
       <input
         type="email"
-        [(ngModel)]="email"
+        [(ngModel)]="data.email"
         name="email"
         placeholder="Email"
         required="required"
@@ -29,11 +29,24 @@
 
       <input
         type="text"
-        [(ngModel)]="telefono"
+        [(ngModel)]="data.telefono"
         name="telefono"
         placeholder="Telefono"
         required="required"
-      /> -->
+      />
+
+      <select id="inputState" class="form-control" [(ngModel)]="data.cuenta" name="cuent">
+        <option value="" selected>Seleccione....</option>
+        <option *ngFor="let option of cuentas" [value]="option.cuenta">{{ option.cuenta }}</option>
+      </select> 
+
+      <select id="inputState" class="form-control" [(ngModel)]="data.bancodestino" name="bank">
+        <option value="" selected>Seleccione...</option>
+        <option *ngFor="let option of bancos" [value]="option.banco">{{ option.banco }}</option>
+      </select>
+
+      <button type="submit" (click)="destinatario()">Registrar</button>
+    </form> 
 
       <!-- <input
         type="text"
@@ -42,7 +55,21 @@
         placeholder="Cuenta"
         required="required"
       /> -->
-
+      <!-- <form (ngSubmit)="submit()" #forma="ngForm">
+        <h3>Inicio de sesión - Formulario por template</h3>
+        <hr />
+        <label for="name"><b>Nombre</b></label>
+        <input
+                type="text"
+                #name="ngModel"
+                [(ngModel)]="register.name"
+                placeholder="Introduzca su nombre de pila"
+                name="name"
+                minlength="5"
+                class="form-control"
+                required
+                [ngClass]="{'is-valid': !name.invalid, 'is-invalid': name.invalid}"
+              />
 
       <div>
         <label for="rut">
@@ -70,7 +97,7 @@
           Telefono
         </label>
         <input id="telefono" type="text" formControlName="telefono">
-      </div>
+      </div> -->
 
       <!-- <select class="form-select" [(ngModel)]="selected">
         <option *ngFor="let n of bancos">{{ n }}</option>
@@ -110,9 +137,269 @@
       <!-- <p [hidden]="opcionSeleccionado == 'Santander'">Haz seleccionado la opción # {{ verSeleccion }}</p> -->
       <!-- <button type="submit" >Registrar</button>
     </form> -->
-    <button class="button" type="submit">Purchase</button>
-  </form>
+    <!-- <button class="button" type="submit">Purchase</button>
+  </form> -->
     <!-- Prueba para ver la opción seleccionado -->
 <!-- <p [hidden]="opcionSeleccionado == 'Santander'">Haz seleccionado la opción # {{ verSeleccion }}</p> -->
   <!-- </div> -->
 
+  <!-- <div class="container">
+    <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
+  
+      <h3>Inicio de sesión - Formulario reactivo</h3>
+      <label>Nombre</label>
+      <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid':  form.name.errors }" />
+     
+      <label>Email</label>
+      <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': form.email.errors }" />
+
+  
+      <label>Contraseña</label>
+      <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': form.password.errors }" />
+    
+  
+      <label>Repetir contraseña</label>
+      <input type="password" formControlName="repeatPass" class="form-control" [ngClass]="{ 'is-invalid': form.repeatPass.errors }" />
+      <div *ngIf="form.repeatPass.errors" class="invalid-feedback">
+        <div *ngIf="form.repeatPass.errors.required">Repetir contraseña es requerido</div>
+        <div *ngIf="form.repeatPass.errors.mustMatch">Las contraseñas debden de coincidir</div>
+      </div>
+      <div class="text-center">
+        <button class="btn btn-primary mr-1" [disabled]="registerForm.invalid">Registrarse</button>
+        <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+      </div>
+    </form>
+  </div> -->
+
+
+
+  <!-- <div class="container">
+    <form (ngSubmit)="submit()" #forma="ngForm">
+      <h3>Inicio de sesión - Formulario por template</h3>
+      <hr />
+      <label for="name"><b>Nombre</b></label>
+      <input
+              type="text"
+              #name="ngModel"
+              [(ngModel)]="register.name"
+              placeholder="Introduzca su nombre de pila"
+              name="name"
+              minlength="5"
+              class="form-control"
+              required
+              [ngClass]="{'is-valid': !name.invalid, 'is-invalid': name.invalid}"
+            />
+  
+      <div class="invalid-feedback" *ngIf="name.invalid && (name.dirty || name.touched)">
+        <div *ngIf="name.errors">
+          Introduzca un nombre de pila con 5 caracteres mínimo
+        </div>
+        <div *ngIf="name.errors">
+          Introduzca un nombre de pila válido por favor
+        </div>
+      </div>
+      <label for="email"><b>Correo electrónico</b></label>
+      <input
+              type="email"
+              #email="ngModel"
+              [(ngModel)]="register.email"
+              placeholder="Introduzca la correo electrónico"
+              name="email"
+              class="form-control"
+              required
+              [ngClass]="{'is-valid': !email.invalid, 'is-invalid': email.invalid}"
+              pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+            />
+  
+      <div class="invalid-feedback" *ngIf="email.invalid && (email.dirty || email.touched)">
+        <div *ngIf="email.errors">
+          Introduzca un correo electrónico válido por favor {{ email.value }}
+        </div>
+        <div *ngIf="email.errors && email.errors">
+          El correo electrónico no sigue el formato correcto. Sigue este ejemplo: anartz@mugika.com
+          {{ email.value }}
+        </div>
+      </div>
+      <label for="psw"><b>Contraseña</b></label>
+      <input
+              type="password"
+              placeholder="Introduzca la contraseña"
+              #password="ngModel"
+              [(ngModel)]="register.password"
+              name="password"
+              class="form-control"
+              required
+              [ngClass]="{'is-valid': !password.invalid, 'is-invalid': password.invalid}"
+            />
+      <div class="invalid-feedback" *ngIf="password.invalid && (password.dirty || password.touched)">
+        <div *ngIf="password.errors">
+          Introduzca una contraseña por favor
+        </div>
+      </div>
+      <label for="psw"><b>Repetir Contraseña</b></label>
+      <input
+              type="password"
+              placeholder="Repetir la contraseña"
+              #repeatPass="ngModel"
+              [(ngModel)]="register.repeatPass"
+              name="repeatPass"
+              class="form-control"
+              required
+              [ngClass]="{'is-valid': !repeatPass.invalid, 'is-invalid': repeatPass.invalid}"
+            />
+      <div class="invalid-feedback" *ngIf="repeatPass.invalid && (repeatPass.dirty || repeatPass.touched)">
+        <div *ngIf="repeatPass.errors">
+          Introduzca una contraseña por favor
+        </div>
+      </div>
+      <br>
+   
+      <form class="custom-form" method="post">  
+      <select id="inputState" class="form-control">
+        <option *ngFor="let option of bancos" [value]="option.banco">{{ option.banco }}</option>
+      </select> -->
+    
+      <!-- <div class="row">
+        <div class="col-lg">
+          <button type="submit" class="btn btn-primary" [disabled]="!forma.valid">Registrarse</button>
+        </div>
+      </div> -->
+
+    <!-- <form class="custom-form" method="post"> 
+        <select id="inputState" class="form-control">
+          <option *ngFor="let option of cuentas" [value]="option.cuenta">{{ option.cuenta }}</option>
+        </select>       
+    <button type="submit" >Registrar</button>
+    </form> -->
+    <pre>{{ data | json}}</pre>
+  <!-- </div> -->
+
+
+  <!-- <form action="">
+    <select class="form-select" [(ngModel)]="selected">
+      <option *ngFor="let n of bancos">{{ n }}</option>
+    </select>
+    {{ selected }}
+  </form> -->
+
+
+  <!-- <div class="container">
+    <label>
+      Email:
+      <input type="text" [formControl]="email" />
+    </label>
+    <p>Value: {{ email.value }}</p>
+    <button (click)="updateEmail()">Update Email</button>
+  
+    <section>
+      <label for="name">
+        Name:
+        <input
+          name="name"
+          type="text"
+          [(ngModel)]="name"
+          placeholder="Contact name"
+        />
+      </label>
+    </section>
+  </div> -->
+
+
+
+  <!-- <div class="container">
+    <div class="columns is-centered">
+        <div class="column is-6-tablet is-5-desktop is-4-widescreen">
+
+            <form (ngSubmit)="SaveData(destinatarioForm)" class="box" #destinatarioForm="ngForm">
+                <div class="field">
+                  <label for="" class="label">Rut</label>
+                  <div class="control has-icons-left">
+                      <input required name="rut" [(ngModel)]="data.rut" #rut="ngModel" type="text"
+                          placeholder="26.852.147-2" class="input">
+                      <span class="icon is-small is-left">
+                          <i class="fa fa-envelope"></i>
+                      </span>
+                  </div>
+
+                  <ng-container *ngIf="rut.invalid && rut.dirty">
+                      <span class="help is-danger">El campo e-mail es requerido.</span>
+                  </ng-container>
+              </div>
+                <div class="field">
+                  <label for="" class="label">Nombre</label>
+                  <div class="control has-icons-left">
+                      <input required name="nombre" [(ngModel)]="data.nombre" #nombre="ngModel" type="text"
+                          placeholder="Luis" class="input">
+                      <span class="icon is-small is-left">
+                          <i class="fa fa-envelope"></i>
+                      </span>
+                  </div>
+
+                  <ng-container *ngIf="nombre.invalid && nombre.dirty">
+                      <span class="help is-danger">El campo e-mail es requerido.</span>
+                  </ng-container>
+              </div>
+                <div class="field">
+                    <label for="" class="label">Email</label>
+                    <div class="control has-icons-left">
+                        <input required name="email" [(ngModel)]="data.email" #email="ngModel" type="email"
+                            placeholder="luis@luis.com" class="input">
+                        <span class="icon is-small is-left">
+                            <i class="fa fa-envelope"></i>
+                        </span>
+                    </div>
+
+                    <ng-container *ngIf="email.invalid && email.dirty">
+                        <span class="help is-danger">El campo e-mail es requerido.</span>
+                    </ng-container>
+                </div>
+                <div class="field">
+                    <label for="" class="label">Telefono</label>
+                    <div class="control has-icons-left">
+                        <input required name="telefono" [(ngModel)]="data.telefono" #telefono="ngModel" type="text"
+                            placeholder="+56 9 12345678" class="input">
+                        <span class="icon is-small is-left">
+                            <i class="fa fa-lock"></i>
+                        </span>
+                    </div>
+
+                    <ng-container *ngIf="telefono.invalid && telefono.dirty">
+                        <span class="help is-danger">El campo password es requerido.</span>
+                    </ng-container>
+                </div>
+
+                <div class="field">
+                  <label for="" class="label">Cuenta</label>
+                  <div class="control has-icons-left">
+                    <select id="inputState" class="form-control" [(ngModel)]="data.cuenta" name="cuent">
+                      <option value="" selected>Seleccione....</option>
+                      <option *ngFor="let option of cuentas" [value]="option.cuenta">{{ option.cuenta }}</option>
+                    </select> 
+                    
+                  </div>
+
+                </div>
+
+              <div class="field">
+                <label for="" class="label">Banco</label>
+                <div class="control has-icons-left">
+                  <select id="inputState" class="form-control" [(ngModel)]="data.banco" name="bank">
+                    <option value="" selected>Seleccione...</option>
+                    <option *ngFor="let option of bancos" [value]="option.banco">{{ option.banco }}</option>
+                  </select> 
+                </div>
+             </div>
+
+                <div class="field">
+                     <button [disabled]="!loginForm.form.valid" class="button is-success">
+                        Login
+                    </button> -->
+                    <!-- <button type="submit" class="button is-success">
+                      Destinatario
+                  </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>  -->
+  

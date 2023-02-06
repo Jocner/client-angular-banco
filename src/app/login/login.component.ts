@@ -70,7 +70,7 @@ export class LoginComponent {
           //     break;
           default:
             // this.router.navigateByUrl("/destinatario");
-            console.log("It is a Saturday.");
+            console.log("Destinatario");
               break;
       }
 

@@ -25,6 +25,12 @@ export class ServicesService {
     return this.http.post("http://localhost:4000/newDestinatario", user);
   }
 
+  alldestinatarios(): Observable<any> {
+
+    return this.http.get("http://localhost:4000/destinatarios")
+     
+  }
+
   bancos(): Observable<any> {
    
     return this.http.get("http://localhost:4000/bancos");
